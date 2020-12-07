@@ -7,28 +7,30 @@ const format: Task = {
   async fn({ sh }) {
     return Promise.all([
       sh(
-        `fd -E _build ml . -x opam exec ocamlformat -- -i --enable-outside-detected-project`,
+        `fd -E _build ml . -x opam exec ocamlformat -- -i --enable-outside-detected-project`
       ),
-      sh(`deno --unstable -L debug fmt --ignore="_build"`)
+      sh(`deno --unstable -L debug fmt --ignore="_build"`),
     ]);
   },
 };
-const runAllDays: Task = dayInts.map((i) => `rad -l info run_day_${i}`).join(
-  " && ",
-);
+const runAllDays: Task = dayInts
+  .map((i) => `rad -l info run_day_${i}`)
+  .join(" && ");
 export const tasks: Tasks = {
   ...{ c: clean, clean },
   ...{ f: format, format },
-  ...(dayInts.reduce((acc, i) => {
-    const run =
-      `cp fixture.ml day${i}/ && cd day${i} && dune exec ./bin.exe ./input.txt`;
+  ...dayInts.reduce((acc, i) => {
+    const run = `cp fixture.ml day${i}/ && cd day${i} && dune exec ./bin.exe ./input.txt`;
+    const test = `cd day${i} && dune runtest`;
     return {
       ...acc,
       ...{
         [`run_day_${i}`]: run,
-        [`rd${i}`]: run,
+        [i]: run,
+        [`t${i}`]: test,
+        [`test${i}`]: test,
       },
     };
-  }, {} as Record<string, Task>)),
+  }, {} as Record<string, Task>),
   runAllDays,
 };

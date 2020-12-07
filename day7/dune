@@ -1,0 +1,18 @@
+(executable
+ (name bin)
+ (modules bin)
+ (libraries lib))
+
+(library
+ (modules fixture lib)
+ (name lib)
+ (libraries base containers))
+
+(tests
+ (names test)
+ (modules test)
+ (libraries alcotest lib))
+
+(alias
+ (name runtest)
+ (deps test.exe))
