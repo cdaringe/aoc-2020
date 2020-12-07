@@ -5,9 +5,10 @@ const dayInts = Array.from(new Array(26)).map((_, i) => i + 1);
 const clean: Task = `fd -H -I .merlin -x rm {}`;
 const format: Task = {
   async fn({ sh }) {
+    const fd = Deno.build.os === "linux" ? "fdfind" : "fd";
     return Promise.all([
       sh(
-        `fd -E _build ml . -x opam exec ocamlformat -- -i --enable-outside-detected-project`
+        `${fd} -E _build ml . -x opam exec ocamlformat -- -i --enable-outside-detected-project`,
       ),
       sh(`deno --unstable -L debug fmt --ignore="_build"`),
     ]);
@@ -20,7 +21,8 @@ export const tasks: Tasks = {
   ...{ c: clean, clean },
   ...{ f: format, format },
   ...dayInts.reduce((acc, i) => {
-    const run = `cp fixture.ml day${i}/ && cd day${i} && dune exec ./bin.exe ./input.txt`;
+    const run =
+      `cp fixture.ml day${i}/ && cd day${i} && dune exec ./bin.exe ./input.txt`;
     const test = `cd day${i} && dune runtest`;
     return {
       ...acc,

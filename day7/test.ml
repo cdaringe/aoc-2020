@@ -1,7 +1,9 @@
 open Printf
 open Base
 
-let _ = Caml.print_string @@ sprintf ""; List.append
+let _ =
+  Caml.print_string @@ sprintf "";
+  List.append
 
 let test_of_thing () = Alcotest.(check int) "arst" 1 1
 

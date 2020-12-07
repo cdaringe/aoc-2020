@@ -1,12 +1,21 @@
 (executable
  (name bin)
  (modules bin)
- (libraries lib))
+ (libraries p1 p2))
 
 (library
- (modules fixture lib)
- (name lib)
- (libraries base containers))
+ (modules p1)
+ (name p1)
+ (libraries base containers fixture))
+
+(library
+ (modules p2)
+ (name p2)
+ (libraries base containers fixture))
+
+(library
+ (modules fixture)
+ (name fixture))
 
 (tests
  (names test)
