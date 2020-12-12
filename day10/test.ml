@@ -44,6 +44,28 @@ let test_jolt_find_graph_4 () =
     (Some [ 2; 5; 8; 11; 12 ])
     (P1.JoltLyfe.find_graph [ 2; 5; 8; 11; 12 ] ~device_joltage:15)
 
+let demo_input = [ 16; 10; 15; 5; 1; 11; 7; 19; 6; 12; 4 ]
+
+let test_count_combos_0 () =
+  Alcotest.(check int)
+    "arst" 8
+    (P2.JoltLyfe.count_adapter_combinations demo_input ~device_joltage:22)
+
+let test_count_combos_1 () =
+  Alcotest.(check int)
+    "arst" 1
+    (P2.JoltLyfe.count_adapter_combinations [ 1 ] ~device_joltage:4)
+
+let test_count_combos_2 () =
+  Alcotest.(check int)
+    "arst" 2
+    (P2.JoltLyfe.count_adapter_combinations [ 1; 2 ] ~device_joltage:5)
+
+let test_count_combos_3 () =
+  Alcotest.(check int)
+    "arst" 4
+    (P2.JoltLyfe.count_adapter_combinations [ 1; 2; 3 ] ~device_joltage:6)
+
 let () =
   let open Alcotest in
   run "test"
@@ -59,5 +81,9 @@ let () =
             ("test_jolt_find_graph_2", test_jolt_find_graph_2);
             ("test_jolt_find_graph_3", test_jolt_find_graph_3);
             ("test_jolt_find_graph_4", test_jolt_find_graph_4);
+            ("test_count_combos_0", test_count_combos_0);
+            ("test_count_combos_1", test_count_combos_1);
+            ("test_count_combos_2", test_count_combos_2);
+            ("test_count_combos_3", test_count_combos_3);
           ] );
     ]
