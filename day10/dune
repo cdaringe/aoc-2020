@@ -1,0 +1,35 @@
+(executable
+ (name bin)
+ (modules bin)
+ (libraries p1 p2)
+ (preprocess (pps ppx_string)))
+
+(library
+ (modules p1)
+ (name p1)
+ (libraries base containers fixture)
+ (preprocess (pps ppx_string))
+ )
+
+(library
+ (modules p2)
+ (name p2)
+ (libraries base containers fixture)
+ (preprocess (pps ppx_string))
+ )
+
+(library
+ (modules fixture)
+ (name fixture)
+ (preprocess (pps ppx_string)))
+
+(tests
+ (names test)
+ (modules test)
+ (libraries alcotest p1 p2)
+ (preprocess (pps ppx_string))
+)
+
+(alias
+ (name runtest)
+ (deps test.exe))

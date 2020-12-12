@@ -20,7 +20,8 @@
 (tests
  (names test)
  (modules test)
- (libraries alcotest lib))
+ (libraries alcotest p1 p2))
+
 
 (alias
  (name runtest)
