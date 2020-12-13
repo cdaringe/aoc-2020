@@ -22,7 +22,7 @@ export const tasks: Tasks = {
   ...{ f: format, format },
   ...dayInts.reduce((acc, i) => {
     const run =
-      `cp fixture.ml day${i}/ && cd day${i} && time dune exec ./bin.exe ./input.txt`;
+      `cp fixture.ml day${i}/ && cd day${i} && time dune exec ./bin.exe`;
     const test = `cd day${i} && dune runtest`;
     return {
       ...acc,

@@ -5,10 +5,11 @@ let line_stream_of_channel : 'a -> string Stream.t =
   let read () = input_line channel in
   Stream.from (fun _ -> try Some (read ()) with End_of_file -> Option.None)
 
+let get_input_filename () = match Sys.getenv_opt "INPUT" with None -> "input.txt" | Some x -> x
 let get_lines : (string -> 'a) -> 'b list =
  fun parse_line ->
   let lines = ref [] in
-  let in_channel = open_in "input.txt" in
+  let in_channel = open_in (get_input_filename ()) in
   try
     Stream.iter
       (fun line -> lines := parse_line line :: !lines)
