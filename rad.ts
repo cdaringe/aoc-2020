@@ -21,8 +21,7 @@ export const tasks: Tasks = {
   ...{ c: clean, clean },
   ...{ f: format, format },
   ...dayInts.reduce((acc, i) => {
-    const run =
-      `cp fixture.ml day${i}/ && cd day${i} && time dune exec ./bin.exe`;
+    const run = `cp fixture.ml day${i}/ && cd day${i} && dune exec ./bin.exe`;
     const test = `cd day${i} && dune runtest`;
     return {
       ...acc,

@@ -37,4 +37,4 @@ let group_by_newline lines =
           | _ -> failwith @@ sprintf "bad lines %s" s ))
     [ [] ] lines
 
-let get_newline_delimited_lines () = get_lines (fun i -> i) |> group_by_newline
+let get_newline_delimited_lines () = get_lines (fun i -> i) |> List.rev |> group_by_newline
