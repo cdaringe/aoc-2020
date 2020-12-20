@@ -14,7 +14,8 @@
 (library
  (modules p2)
  (name p2)
- (libraries base containers fixture)
+ (libraries base containers fixture lp lp-glpk lp-gurobi)
+ (flags -cclib -lglpk)
  (preprocess (pps ppx_string ppx_deriving.show))
  )
 

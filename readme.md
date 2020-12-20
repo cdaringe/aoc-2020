@@ -8,3 +8,5 @@ https://adventofcode.com/2020, `ocaml` style!
 - `opam switch import opam.deps` (generated via `opam switch export ./opam.deps`)
 - `rad run_day_X`
   - or `cp fixture.ml dayX/ && cd dayX && dune exec ./bin.exe ./input.txt`
+
+You may also need to install `libgplk`, e.g. `brew install glpk`
