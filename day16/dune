@@ -16,6 +16,12 @@
  (name p2)
  (libraries base containers fixture lp lp-glpk lp-gurobi)
  (flags -cclib -lglpk)
+; For compilers to find openblas you may need to set:
+;   export LDFLAGS="-L/usr/local/opt/openblas/lib"
+;   export CPPFLAGS="-I/usr/local/opt/openblas/include"
+
+; For pkg-config to find openblas you may need to set:
+;   export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig"
  (preprocess (pps ppx_string ppx_deriving.show))
  )
 
